@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> {
             children: [
               topText(),
               SizedBox(
-                height: 500,
+                height: 480,
                 child: ListView.builder(
                   itemCount: provider.items.length,
                   itemBuilder: (context, index){
@@ -66,8 +66,62 @@ class _CartPageState extends State<CartPage> {
 
                 }),
               ),
-              Text("Cart Total: \$${provider.getCartTotal()}"),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Cart Total: ", 
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      width: 100,
+                      height: 20,
+                      child: Center(
+                        child: Text("\$${provider.getCartTotal()}", 
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFFE8BE13),
+                            fontSize: 17
+                          )
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            provider.removeAll();
+                          }, 
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          'Clear Cart', 
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12
+                      ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               startButton(),
+              const SizedBox(height: 10),
             ],
           ),
         );
